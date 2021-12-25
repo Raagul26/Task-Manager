@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="h-screen overflow-hidden flex items-center justify-center bg-gray-100">
+    <div class="overflow-x-auto">
+        <div class="flex justify-center text-2xl font-sans mt-20 pt-10">Task Manager</div>
+        <button
+            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded"
+            onclick="toggleModal('modal-id')">
+            Add Task
+        </button>
+        <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
+            <div class="w-full">
+                <div class="bg-white shadow-md rounded my-6">
+                    <table class="min-w-max w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Task</th>
+                                <th class="py-3 px-6 text-left">Assigned</th>
+                                <th class="py-3 px-6 text-center">Assigned To</th>
+                                <th class="py-3 px-6 text-center">Status</th>
+                                <th class="py-3 px-6 text-center">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="table-body" class="text-gray-600 text-sm font-light">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding new task -->
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+        id="modal-id">
+        <div class="relative my-6 w-1/2">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                    <h3 class="text-3xl font-semibold">
+                        Add Task
+                    </h3>
+                    <button
+                        class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        onclick="toggleModal('modal-id')">
+                        <span
+                            class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            ×
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto">
+                    <form action="#" id="add-form">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="">
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Task Name</span>
+                                    <input type="text" id="task-name" class="w-full p-2 border border-gray-300"
+                                        placeholder="Enter task name" require>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Assigned</span>
+                                    <input type="text" id="assigned" class="w-full p-2 border border-gray-300"
+                                        placeholder="Enter your name">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Assigned to</span>
+                                    <input type="text" id="assigned-to" class="w-full p-2 border border-gray-300"
+                                        placeholder="Enter assignee name">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Status</span>
+                                    <select id="status" class="w-full p-2">
+                                        <option value="">Select status</option>
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--footer-->
+                <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <button
+                        class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" onclick="toggleModal('modal-id')">
+                        Cancel
+                    </button>
+                    <button
+                        class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" onclick="addTask ()">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+    <script src="app.js"></script>
+</body>
+
+</html>
