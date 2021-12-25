@@ -20,6 +20,8 @@ function toggleModal(modalID){
     document.getElementById('status')["value"] = ""
 }
 
+
+
 function addTask()
 {
     let taskName = document.getElementById('task-name')["value"]
@@ -41,7 +43,8 @@ function addTask()
         var tableRow = document.createElement('tr')
         var rowClasses = ['border-b', 'border-gray-200', 'hover:bg-gray-100']
         tableRow.classList.add(...rowClasses)
-        tableRow.setAttribute("id",rowData.task)
+        tableRow.setAttribute("id",rowData.task + rowData.assigned + rowData.assignedTo)
+        
 
 
         var tableCol1 = document.createElement('td')
@@ -107,7 +110,7 @@ function addTask()
         </svg>`
         deleteDiv.addEventListener('click', (e) =>
         {
-            document.getElementById(rowData.task).remove()
+            document.getElementById(rowData.task+rowData.assigned+rowData.assignedTo).remove()
         })
 
 
