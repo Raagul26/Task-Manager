@@ -7,6 +7,12 @@ interface taskRow{
     status:statusCode
 }
 
+interface Window {
+    data: any;
+}
+
+declare var data: any;
+data = ""
 
 function toggleModal(modalID){
     document.getElementById(modalID).classList.toggle("hidden");
@@ -95,7 +101,7 @@ function addTask()
         editDiv.addEventListener('click',(e) => 
         {
             toggleModal("edit-modal")
-            var data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes
+            data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes
         })
 
 
@@ -129,7 +135,7 @@ function addTask()
     } 
 }
 
-function editTask(data)
+function editTask()
 {
     let taskName = document.getElementById('edit-task-name')["value"]
     let assigned = document.getElementById('edit-assigned')["value"]
@@ -137,6 +143,8 @@ function editTask(data)
     let status = document.getElementById('edit-status')["value"]
 
     console.log(taskName,assigned,assignedTo,status)
+    console.log(data)
+    
     data[0].innerText=taskName
     data[1].innerText=assigned
     data[2].innerText=assignedTo

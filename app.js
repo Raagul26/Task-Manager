@@ -1,3 +1,4 @@
+data = "";
 function toggleModal(modalID) {
     document.getElementById(modalID).classList.toggle("hidden");
     document.getElementById("backdrop").classList.toggle("hidden");
@@ -62,7 +63,7 @@ function addTask() {
         editDiv.innerHTML = "\n        <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z\" />\n        </svg>";
         editDiv.addEventListener('click', function (e) {
             toggleModal("edit-modal");
-            var data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes;
+            data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes;
         });
         var deleteDiv = document.createElement('div');
         var deleteDivClasses = ['w-4', 'mr-2', 'transform', 'hover:text-purple-500', 'hover:scale-110'];
@@ -83,12 +84,13 @@ function addTask() {
         toggleModal('add-modal');
     }
 }
-function editTask(data) {
+function editTask() {
     var taskName = document.getElementById('edit-task-name')["value"];
     var assigned = document.getElementById('edit-assigned')["value"];
     var assignedTo = document.getElementById('edit-assigned-to')["value"];
     var status = document.getElementById('edit-status')["value"];
     console.log(taskName, assigned, assignedTo, status);
+    console.log(data);
     data[0].innerText = taskName;
     data[1].innerText = assigned;
     data[2].innerText = assignedTo;
