@@ -94,6 +94,14 @@ function editTask() {
     data[0].innerText = taskName;
     data[1].innerText = assigned;
     data[2].innerText = assignedTo;
-    data[3].innerText = status;
+    if (status == 'completed') {
+        data[3].innerHTML = "<span class=\"bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs\">Completed</span>";
+    }
+    else if (status == 'scheduled') {
+        data[3].innerHTML = "<span class=\"bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs\">Scheduled</span>";
+    }
+    else {
+        data[3].innerHTML = "<span class=\"bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs\">Pending</span>";
+    }
     toggleModal('edit-modal');
 }
