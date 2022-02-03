@@ -10,17 +10,15 @@ interface taskRow{
 
 function toggleModal(modalID){
     document.getElementById(modalID).classList.toggle("hidden");
-    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+    document.getElementById("backdrop").classList.toggle("hidden");
     document.getElementById(modalID).classList.toggle("flex");
-    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    document.getElementById("backdrop").classList.toggle("flex");
 
     document.getElementById('task-name')["value"] = ""
     document.getElementById('assigned')["value"] = ""
     document.getElementById('assigned-to')["value"] = ""
     document.getElementById('status')["value"] = ""
 }
-
-
 
 function addTask()
 {
@@ -45,7 +43,6 @@ function addTask()
         tableRow.classList.add(...rowClasses)
         tableRow.setAttribute("id",rowData.task + rowData.assigned + rowData.assignedTo)
         
-
 
         var tableCol1 = document.createElement('td')
         var col1Classes = ['py-3', 'px-6', 'text-left', 'whitespace-nowrap', 'font-normal']
@@ -97,7 +94,8 @@ function addTask()
         </svg>`
         editDiv.addEventListener('click',(e) => 
         {
-            
+            toggleModal("edit-modal")
+            var data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes
         })
 
 
@@ -126,7 +124,23 @@ function addTask()
 
         tableBody.appendChild(tableRow)
 
-        toggleModal('modal-id')
+        toggleModal('add-modal')
         
     } 
+}
+
+function editTask(data)
+{
+    let taskName = document.getElementById('edit-task-name')["value"]
+    let assigned = document.getElementById('edit-assigned')["value"]
+    let assignedTo = document.getElementById('edit-assigned-to')["value"]
+    let status = document.getElementById('edit-status')["value"]
+
+    console.log(taskName,assigned,assignedTo,status)
+    data[0].innerText=taskName
+    data[1].innerText=assigned
+    data[2].innerText=assignedTo
+    data[3].innerText=status
+
+    toggleModal('edit-modal')
 }
