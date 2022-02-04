@@ -1,8 +1,9 @@
+data = "";
 function toggleModal(modalID) {
     document.getElementById(modalID).classList.toggle("hidden");
-    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+    document.getElementById("backdrop").classList.toggle("hidden");
     document.getElementById(modalID).classList.toggle("flex");
-    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    document.getElementById("backdrop").classList.toggle("flex");
     document.getElementById('task-name')["value"] = "";
     document.getElementById('assigned')["value"] = "";
     document.getElementById('assigned-to')["value"] = "";
@@ -61,6 +62,8 @@ function addTask() {
         (_h = editDiv.classList).add.apply(_h, editDivClasses);
         editDiv.innerHTML = "\n        <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z\" />\n        </svg>";
         editDiv.addEventListener('click', function (e) {
+            toggleModal("edit-modal");
+            data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes;
         });
         var deleteDiv = document.createElement('div');
         var deleteDivClasses = ['w-4', 'mr-2', 'transform', 'hover:text-purple-500', 'hover:scale-110'];
@@ -78,6 +81,27 @@ function addTask() {
         tableRow.appendChild(tableCol4);
         tableRow.appendChild(tableCol5);
         tableBody.appendChild(tableRow);
-        toggleModal('modal-id');
+        toggleModal('add-modal');
     }
+}
+function editTask() {
+    var taskName = document.getElementById('edit-task-name')["value"];
+    var assigned = document.getElementById('edit-assigned')["value"];
+    var assignedTo = document.getElementById('edit-assigned-to')["value"];
+    var status = document.getElementById('edit-status')["value"];
+    console.log(taskName, assigned, assignedTo, status);
+    console.log(data);
+    data[0].innerText = taskName;
+    data[1].innerText = assigned;
+    data[2].innerText = assignedTo;
+    if (status == 'completed') {
+        data[3].innerHTML = "<span class=\"bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs\">Completed</span>";
+    }
+    else if (status == 'scheduled') {
+        data[3].innerHTML = "<span class=\"bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs\">Scheduled</span>";
+    }
+    else {
+        data[3].innerHTML = "<span class=\"bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs\">Pending</span>";
+    }
+    toggleModal('edit-modal');
 }

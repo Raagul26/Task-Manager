@@ -7,20 +7,24 @@ interface taskRow{
     status:statusCode
 }
 
+interface Window {
+    data: any;
+}
+
+declare var data: any;
+data = ""
 
 function toggleModal(modalID){
     document.getElementById(modalID).classList.toggle("hidden");
-    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+    document.getElementById("backdrop").classList.toggle("hidden");
     document.getElementById(modalID).classList.toggle("flex");
-    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    document.getElementById("backdrop").classList.toggle("flex");
 
     document.getElementById('task-name')["value"] = ""
     document.getElementById('assigned')["value"] = ""
     document.getElementById('assigned-to')["value"] = ""
     document.getElementById('status')["value"] = ""
 }
-
-
 
 function addTask()
 {
@@ -45,7 +49,6 @@ function addTask()
         tableRow.classList.add(...rowClasses)
         tableRow.setAttribute("id",rowData.task + rowData.assigned + rowData.assignedTo)
         
-
 
         var tableCol1 = document.createElement('td')
         var col1Classes = ['py-3', 'px-6', 'text-left', 'whitespace-nowrap', 'font-normal']
@@ -97,7 +100,8 @@ function addTask()
         </svg>`
         editDiv.addEventListener('click',(e) => 
         {
-            
+            toggleModal("edit-modal")
+            data = e.target['parentElement']['parentElement']['parentElement']['parentElement'].childNodes
         })
 
 
@@ -126,7 +130,37 @@ function addTask()
 
         tableBody.appendChild(tableRow)
 
-        toggleModal('modal-id')
+        toggleModal('add-modal')
         
     } 
+}
+
+function editTask()
+{
+    let taskName = document.getElementById('edit-task-name')["value"]
+    let assigned = document.getElementById('edit-assigned')["value"]
+    let assignedTo = document.getElementById('edit-assigned-to')["value"]
+    let status = document.getElementById('edit-status')["value"]
+
+    console.log(taskName,assigned,assignedTo,status)
+    console.log(data)
+
+    
+    
+    data[0].innerText=taskName
+    data[1].innerText=assigned
+    data[2].innerText=assignedTo
+    if(status == 'completed'){
+        data[3].innerHTML = `<span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Completed</span>`
+    }
+    else if (status == 'scheduled')
+    {
+        data[3].innerHTML = `<span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Scheduled</span>`
+    }
+    else
+    {
+        data[3].innerHTML = `<span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Pending</span>`
+    }
+
+    toggleModal('edit-modal')
 }

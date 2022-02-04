@@ -8,7 +8,6 @@
     <link href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
     <title>Task Manager</title>
     <link rel="icon" type="image/x-icon" href="favicon.png">
-
 </head>
 
 <body class="h-screen overflow-hidden flex items-center justify-center bg-gray-100">
@@ -16,7 +15,7 @@
         <div class="flex justify-center text-2xl font-sans mt-20 pt-10">Task Manager</div>
         <button
             class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded"
-            onclick="toggleModal('modal-id')">
+            onclick="toggleModal('add-modal')">
             Add Task
         </button>
         <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
@@ -43,7 +42,7 @@
 
     <!-- Modal for adding new task -->
     <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
-        id="modal-id">
+        id="add-modal">
         <div class="relative my-6 w-1/2">
             <!--content-->
             <div
@@ -55,10 +54,9 @@
                     </h3>
                     <button
                         class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                        onclick="toggleModal('modal-id')">
+                        onclick="toggleModal('edit-modal')">
                         <span
                             class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                            ×
                         </span>
                     </button>
                 </div>
@@ -105,7 +103,7 @@
                 <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
                         class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button" onclick="toggleModal('modal-id')">
+                        type="button" onclick="toggleModal('add-modal')">
                         Cancel
                     </button>
                     <button
@@ -117,7 +115,88 @@
             </div>
         </div>
     </div>
-    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+        id="edit-modal">
+        <div class="relative my-6 w-1/2">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                    <h3 class="text-3xl font-semibold">
+                        Edit Task
+                    </h3>
+                    <button
+                        class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        onclick="toggleModal('edit-modal')">
+                        <span
+                            class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto">
+                    <form action="#" id="edit-form">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="">
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Task Name</span>
+                                    <input type="text" id="edit-task-name" class="w-full p-2 border border-gray-300"
+                                        placeholder="Enter task name" require>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Assigned</span>
+                                    <input type="text" id="edit-assigned" class="w-full p-2 border border-gray-300"
+                                        placeholder="Enter your name">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Assigned to</span>
+                                    <input type="text" id="edit-assigned-to" class="w-full p-2 border border-gray-300"
+                                        placeholder="Enter assignee name">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block">
+                                    <span class="block text-sm font-medium text-gray-700">Status</span>
+                                    <select id="edit-status" class="w-full p-2">
+                                        <option value="">Select status</option>
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--footer-->
+                <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <button
+                        class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" onclick="toggleModal('edit-modal')">
+                        Cancel
+                    </button>
+                    <button
+                        class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" onclick="editTask()">
+                        Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="backdrop"></div>
+
+    <a href="https://github.com/Raagul26/Task-Manager" target="_blank" id="github-btn" class="fixed bottom-5 right-5">
+        <svg height="32" width="32" viewBox="0 0 16 16" >
+            <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+    </a>
     <script src="app.js"></script>
 </body>
 
